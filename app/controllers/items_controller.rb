@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   # GET /items
@@ -22,7 +23,7 @@ class ItemsController < ApplicationController
   # POST /items
   def create
     @item = Item.new(item_params)
-
+    @item.user = current_user
     if @item.save
       redirect_to @item, notice: 'Item was successfully created.'
     else
@@ -53,6 +54,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :description, :price, :address, :amount, :user_id)
+      params.require(:item).permit(:name, :description, :price, :address, :amount)
     end
 end
