@@ -5,6 +5,11 @@ class ItemsController < ApplicationController
   # GET /items
   def index
     @items = policy_scope(Item).order(created_at: :desc)
+    if params[:query].present?
+      @items = Item.where("name ILIKE ?", "%#{params[:query]}%")
+    else
+      @movies = Item.all
+    end
   end
 
   # GET /items/1
