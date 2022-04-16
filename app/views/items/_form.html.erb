@@ -36,10 +36,8 @@
     <%= form.number_field :amount %>
   </div>
 
-  <div class="field">
-    <%= form.label :photo, as: :file %>
-    <%= form.text_field :photo, as: :file %>
-  </div>
+  <%= form.file_field :photo, accept: 'image/png,image/jpeg'%>
+
 
   <div class="actions">
     <%= form.submit %>
