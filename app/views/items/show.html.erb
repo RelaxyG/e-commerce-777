@@ -24,7 +24,10 @@
   <strong>Amount:</strong>
   <%= @item.amount %>
 </p>
+<p><% if policy(@item).edit? %>
+              <%= link_to 'Edit', edit_item_path(@item) %>
+            <%end%>
+        </p>
 
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<p><%= link_to 'Back', items_path %></p>
