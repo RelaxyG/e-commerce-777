@@ -36,6 +36,11 @@
     <%= form.number_field :amount %>
   </div>
 
+  <div class="field">
+    <%= form.label :photo, as: :file %>
+    <%= form.text_field :photo, as: :file %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
