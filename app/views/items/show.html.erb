@@ -24,10 +24,18 @@
   <strong>Amount:</strong>
   <%= @item.amount %>
 </p>
+<ul class="list-group">
+  <% @item.reviews.each do |review| %>
+    <li class="list-group-item"><%= review.content %></li>
+  <% end %>
+</ul>
 <p><% if policy(@item).edit? %>
               <%= link_to 'Edit', edit_item_path(@item) %>
             <%end%>
         </p>
+<p><% if policy(@item).create? %>
+  <%= link_to 'Leave a review', new_item_review_path(@item) %>
+  <%end%>
 
-<%= link_to 'Leave a review', new_item_review_path(@item) %>
+</p>
 <p><%= link_to 'Back', items_path %></p>
