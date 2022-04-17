@@ -6,9 +6,13 @@ class ItemsController < ApplicationController
   def index
     @items = policy_scope(Item).order(created_at: :desc)
     if params[:query].present?
-      @items = Item.where("name ILIKE ?", "%#{params[:query]}%")
+      sql_query = " \
+          items.name ILIKE :query \
+          OR items.description ILIKE :query \
+        "
+        @items = Item.joins(:user).where(sql_query, query: "%#{params[:query]}%")
     else
-      @movies = Item.all
+      @items = Item.all
     end
   end
 
